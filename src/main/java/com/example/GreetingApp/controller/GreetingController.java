@@ -1,11 +1,18 @@
 package com.example.GreetingApp.controller;
 
+import com.example.GreetingApp.services.GreetingService;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 
 @RestController
 @RequestMapping("/")
 public class GreetingController {
+
+    private final GreetingService greetingService;
+
+    public GreetingController(GreetingService greetingService) {
+        this.greetingService = greetingService;
+    }
 
     @GetMapping()
     public Greeting getGreeting(){
@@ -23,5 +30,10 @@ public class GreetingController {
     @DeleteMapping
     public Greeting deleteGreeting() {
         return new Greeting("Hii Spring Boot - DELETE REQUEST");
+    }
+
+    @GetMapping("/greet")
+    public Greeting sayGreeting(){
+        return new Greeting(greetingService.getSimpleGreeting());
     }
 }
