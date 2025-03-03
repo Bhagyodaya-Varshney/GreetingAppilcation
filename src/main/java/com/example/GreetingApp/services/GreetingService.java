@@ -5,6 +5,8 @@ import com.example.GreetingApp.controller.Greeting;
 import com.example.GreetingApp.repository.GreetingRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GreetingService {
     private final GreetingRepository greetingRepository;
@@ -34,5 +36,9 @@ public class GreetingService {
 
     public Greeting getGreetingById(Long id) {
         return greetingRepository.findById(id).orElse(null);
+    }
+
+    public List<Greeting> getAllGreetings() {
+        return greetingRepository.findAll();
     }
 }

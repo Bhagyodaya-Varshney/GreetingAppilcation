@@ -3,6 +3,7 @@ package com.example.GreetingApp.controller;
 import com.example.GreetingApp.services.GreetingService;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("/")
@@ -50,5 +51,9 @@ public class GreetingController {
     @GetMapping("/getById")
     public Greeting getGreetingById(@RequestParam Long id) {
         return greetingService.getGreetingById(id);
+    }
+    @GetMapping("/all")
+    public List<Greeting> getAllGreetings() {
+        return greetingService.getAllGreetings();
     }
 }
