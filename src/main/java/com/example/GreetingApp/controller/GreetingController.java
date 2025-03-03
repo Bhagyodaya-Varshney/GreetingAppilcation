@@ -56,4 +56,9 @@ public class GreetingController {
     public List<Greeting> getAllGreetings() {
         return greetingService.getAllGreetings();
     }
+
+    @PutMapping("/edit")
+    public Greeting editGreeting(@RequestParam Long id, @RequestParam String message) {
+        return greetingService.editGreeting(id, message);
+    }
 }
