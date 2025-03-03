@@ -1,19 +1,24 @@
 package com.example.GreetingApp.controller;
+import jakarta.persistence.*;
 
-import org.springframework.stereotype.Component;
-
+@Entity
 public class Greeting {
-    private String msg;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String message;
 
-    public Greeting(String msg) {
-        this.msg = msg;
+    public Greeting() {}
+
+    public Greeting(String message) {
+        this.message = message;
     }
 
-    public String getMsg() {
-        return msg;
+    public Long getId() {
+        return id;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public String getMessage() {
+        return message;
     }
 }
