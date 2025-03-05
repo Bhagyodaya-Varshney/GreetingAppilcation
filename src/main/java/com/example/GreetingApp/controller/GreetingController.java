@@ -2,7 +2,6 @@ package com.example.GreetingApp.controller;
 
 import com.example.GreetingApp.services.GreetingService;
 import org.springframework.web.bind.annotation.*;
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -17,6 +16,7 @@ public class GreetingController {
 
     @GetMapping()
     public Greeting getGreeting(){
+        System.out.println(1);
         return new Greeting("Hii Spring Boot - GET REQUEST");
     }
     @PostMapping()
