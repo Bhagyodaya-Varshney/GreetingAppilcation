@@ -1,6 +1,7 @@
 package com.example.GreetingApp.controller;
 
-import com.example.GreetingApp.services.GreetingService;
+import com.example.GreetingApp.serviceInterfaces.GreetingServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -8,11 +9,9 @@ import java.util.List;
 @RequestMapping("/")
 public class GreetingController {
 
-    private final GreetingService greetingService;
+    @Autowired
+    GreetingServiceInterface greetingServiceInterface;
 
-    public GreetingController(GreetingService greetingService) {
-        this.greetingService = greetingService;
-    }
 
     @GetMapping()
     public Greeting getGreeting(){
@@ -35,35 +34,35 @@ public class GreetingController {
 
     @GetMapping("/greet")
     public Greeting sayGreeting(){
-        return new Greeting(greetingService.getSimpleGreeting());
+        return new Greeting(greetingServiceInterface.getSimpleGreeting());
     }
     @GetMapping("/greetUser")
     public Greeting getPersonalizedGreeting(@RequestParam(required = false) String firstName,
                                             @RequestParam(required = false) String lastName) {
-        return new Greeting(greetingService.getGreetingMessage(firstName, lastName));
+        return new Greeting(greetingServiceInterface.getGreetingMessage(firstName, lastName));
     }
 
     @PostMapping("/save")
     public Greeting saveGreeting(@RequestParam String message) {
-        return greetingService.saveGreeting(message);
+        return greetingServiceInterface.saveGreeting(message);
     }
 
     @GetMapping("/getById")
     public Greeting getGreetingById(@RequestParam Long id) {
-        return greetingService.getGreetingById(id);
+        return greetingServiceInterface.getGreetingById(id);
     }
     @GetMapping("/all")
     public List<Greeting> getAllGreetings() {
-        return greetingService.getAllGreetings();
+        return greetingServiceInterface.getAllGreetings();
     }
 
     @PutMapping("/edit")
     public Greeting editGreeting(@RequestParam Long id, @RequestParam String message) {
-        return greetingService.editGreeting(id, message);
+        return greetingServiceInterface.editGreeting(id, message);
     }
 
     @DeleteMapping("/delete")
     public String deleteGreeting(@RequestParam Long id) {
-        return greetingService.deleteGreeting(id);
+        return greetingServiceInterface.deleteGreeting(id);
     }
 }

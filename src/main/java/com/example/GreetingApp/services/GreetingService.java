@@ -3,17 +3,17 @@ package com.example.GreetingApp.services;
 
 import com.example.GreetingApp.controller.Greeting;
 import com.example.GreetingApp.repository.GreetingRepository;
+import com.example.GreetingApp.serviceInterfaces.GreetingServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class GreetingService {
-    private final GreetingRepository greetingRepository;
+public class GreetingService implements GreetingServiceInterface {
 
-    public GreetingService(GreetingRepository greetingRepository) {
-        this.greetingRepository = greetingRepository;
-    }
+    @Autowired
+    GreetingRepository greetingRepository;
 
     public String getSimpleGreeting() {
         return "Hello World";
